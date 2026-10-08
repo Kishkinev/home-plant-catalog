@@ -1,0 +1,34 @@
+:root {
+  --color-background: #f6f0e4;
+  --color-surface: #fffcf5;
+  --color-text: #17392a;
+  --color-border: #d4cdbd;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+};
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 16px;
+}
