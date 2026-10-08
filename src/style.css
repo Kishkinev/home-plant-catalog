@@ -60,6 +60,7 @@ textarea {
   border-radius: 10px;
   font-weight: 700;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .button--primary {
@@ -74,4 +75,39 @@ textarea {
 
 .button--primary:hover {
   background-color: var(--color-primary-hover);
+}
+
+.hero {
+  display: grid;
+  gap: 24px;
+  padding-block: 48px;
+}
+
+.hero__title {
+  margin: 0;
+  max-width: 700px;
+  font-size: clamp(32px, 5vw, 64px);
+  line-height: 1.1;
+}
+
+.hero__description {
+  margin: 0;
+  font-size: 18px;
+}
+
+.hero__summary {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.hero__stat {
+  margin: 0;
+}
+
+.hero__count {
+  display: block;
+  font-size: 64px;
+  font-weight: 700;
 }
