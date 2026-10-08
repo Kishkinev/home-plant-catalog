@@ -3,6 +3,8 @@
   --color-surface: #fffcf5;
   --color-text: #17392a;
   --color-border: #d4cdbd;
+  --color-focus: #356fd4;
+  --color-primary-hover: #24523c;
 }
 
 *,
@@ -46,4 +48,30 @@ textarea {
 .site-title {
   margin: 0;
   font-weight: 700;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 20px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.button--primary {
+  background-color: var(--color-text);
+  color: var(--color-surface);
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.button--primary:hover {
+  background-color: var(--color-primary-hover);
 }
