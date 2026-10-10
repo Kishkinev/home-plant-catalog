@@ -182,6 +182,14 @@ textarea {
   color: var(--color-text);
 }
 
+.plant-card--care-overdue {
+  background-color: var(--color-care-overdue);
+}
+
+.plant-card--care-today {
+  background-color: var(--color-care-today);
+}
+
 @media (min-width: 700px) {
   .plant-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));

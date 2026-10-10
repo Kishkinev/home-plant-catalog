@@ -18,7 +18,7 @@
       <section class="hero">
         <h1 class="hero__title">Сегодня растения говорят первыми.</h1>
         <p class="hero__description">
-          Три экземпляра ждут воды. Остальные - в своем темпе
+          Два экземпляра ждут воды. Остальные — в своём ритме.
         </p>
         <div class="hero__summary">
           <p class="hero__stat">
@@ -30,13 +30,60 @@
       </section>
       <section id="care">
         <h2>Уход сегодня</h2>
+        <p>2 растения требуют ухода. Просроченные — первыми.</p>
+        <div class="plant-grid">
+          <article class="plant-card plant-card--care-overdue">
+            <h3 class="plant-card__title">Красное сердце</h3>
+            <p class="plant-card__status plant-card__status--overdue">
+              Полив просрочен на 1 день
+            </p>
+            <button type="button" class="button button--primary">
+              Полито сегодня
+            </button>
+          </article>
+          <article class="plant-card plant-card--care-today">
+            <h3 class="plant-card__title">Монстера Делициоза</h3>
+            <p class="plant-card__status plant-card__status--today">
+              Полить сегодня
+            </p>
+            <button type="button" class="button button--primary">
+              Полито сегодня
+            </button>
+          </article>
+        </div>
       </section>
       <section>
         <h2>Вся коллекция</h2>
         <div class="plant-grid">
           <article class="plant-card">
+            <h3 class="plant-card__title">Красное сердце</h3>
+            <p class="plant-card__status plant-card__status--overdue">
+              Полив просрочен на 1 день
+            </p>
+            <p class="plant-card__room">Спальня</p>
+            <p class="plant-card__interval">Каждый день</p>
+            <p class="plant-card__last-watering-date">
+              Дата последнего полива
+              <time datetime="2026-10-08">8 октября 2026</time>
+            </p>
+            <p class="plant-card__note">Пересаживать раз в 3 месяца</p>
+            <div class="plant-card__actions">
+              <button type="button" class="button button--primary">
+                Полито сегодня
+              </button>
+              <button type="button" class="button button--edit">
+                Редактировать
+              </button>
+              <button type="button" class="button button--delete">
+                Удалить
+              </button>
+            </div>
+          </article>
+          <article class="plant-card">
             <h3 class="plant-card__title">Монстера Делициоза</h3>
-            <p class="plant-card__status">Полить сегодня</p>
+            <p class="plant-card__status plant-card__status--today">
+              Полить сегодня
+            </p>
             <p class="plant-card__room">Гостиная</p>
             <p class="plant-card__interval">Каждые 7 дней</p>
             <p class="plant-card__last-watering-date">
@@ -59,30 +106,10 @@
             </div>
           </article>
           <article class="plant-card">
-            <h3 class="plant-card__title">Красное сердце</h3>
-            <p class="plant-card__status">Полив просрочен на 1 день</p>
-            <p class="plant-card__room">Спальня</p>
-            <p class="plant-card__interval">Каждый день</p>
-            <p class="plant-card__last-watering-date">
-              Дата последнего полива
-              <time datetime="2026-10-08">8 октября 2026</time>
-            </p>
-            <p class="plant-card__note">Пересаживать раз в 3 месяца</p>
-            <div class="plant-card__actions">
-              <button type="button" class="button button--primary">
-                Полито сегодня
-              </button>
-              <button type="button" class="button button--edit">
-                Редактировать
-              </button>
-              <button type="button" class="button button--delete">
-                Удалить
-              </button>
-            </div>
-          </article>
-          <article class="plant-card">
             <h3 class="plant-card__title">Китайская роза</h3>
-            <p class="plant-card__status">Полить 20 октября</p>
+            <p class="plant-card__status plant-card__status--upcoming">
+              Полить через 10 дней
+            </p>
             <p class="plant-card__room">Спальня</p>
             <p class="plant-card__interval">Каждые 10 дней</p>
             <p class="plant-card__last-watering-date">
