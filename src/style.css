@@ -6,6 +6,9 @@
   --color-focus: #356fd4;
   --color-primary-hover: #24523c;
   --color-danger: #a64235;
+  --color-care-today: #dde5d1;
+  --color-care-overdue: #f5e6c5;
+  --color-care-upcoming: #e8e5da;
 }
 
 *,
@@ -154,6 +157,29 @@ textarea {
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
+}
+
+.plant-card__status {
+  justify-self: start;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.plant-card__status--today {
+  background-color: var(--color-care-today);
+  color: var(--color-text);
+}
+
+.plant-card__status--overdue {
+  background-color: var(--color-care-overdue);
+  color: var(--color-danger);
+}
+
+.plant-card__status--upcoming {
+  background-color: var(--color-care-upcoming);
+  color: var(--color-text);
 }
 
 @media (min-width: 700px) {
