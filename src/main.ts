@@ -1,6 +1,7 @@
 import './style.css'
 import type { Plant } from './plant'
 import { validationPlant } from './validation'
+import { formatLocalCalendarDate } from './dates'
 
 const form = document.querySelector('#plant-form')
 
@@ -22,7 +23,8 @@ form.addEventListener('submit', (event) => {
     note: String(data.get('note') ?? '').trim(),
   }
 
-  const errors = validationPlant(plant)
+  const today = formatLocalCalendarDate(new Date())
+  const errors = validationPlant(plant, today)
 
   if (Object.keys(errors).length > 0) {
     console.log(errors)

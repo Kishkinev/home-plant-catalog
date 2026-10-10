@@ -1,12 +1,14 @@
 import type { Plant } from './plant'
+import { parseCalendarDay } from './dates'
 
 export type PlantErrors = {
   name?: string
   room?: string
   wateringIntervalDays?: string
+  lastWateredOn?: string
 }
 
-export function validationPlant(plant: Plant): PlantErrors {
+export function validationPlant(plant: Plant, today: string): PlantErrors {
   const errors: PlantErrors = {}
 
   if (plant.name.trim() === '') errors.name = 'Введите название растения'
@@ -28,6 +30,18 @@ export function validationPlant(plant: Plant): PlantErrors {
   ]
 
   if (!rooms.includes(plant.room)) errors.room = 'Выберите комнату из списка'
+
+  const todayDay = parseCalendarDay(today)
+  const lastWateredDay = parseCalendarDay(plant.lastWateredOn)
+
+  if (todayDay === null) {
+    throw new Error('Некорректная сегодняшняя дата')
+  }
+  if (lastWateredDay === null) {
+    errors.lastWateredOn = 'Укажите корректную дату последнего полива'
+  } else if (lastWateredDay > todayDay) {
+    errors.lastWateredOn = 'Дата последнего полива не может быть в будущем.'
+  }
 
   return errors
 }
