@@ -133,6 +133,67 @@
           </article>
         </div>
       </section>
+      <section class="plant-editor">
+        <h2>Новое растение</h2>
+        <p>* — обязательные поля</p>
+        <form id="plant-form" class="plant-form">
+          <div class="form-field">
+            <label for="plant-name">Название растения*</label>
+            <input type="text" name="name" id="plant-name" required />
+          </div>
+          <div class="form-field">
+            <label for="plant-room">Комната*</label>
+            <select name="room" id="plant-room" required>
+              <option value="">Выберите комнату</option>
+              <option value="Гостиная">Гостиная</option>
+              <option value="Спальня">Спальня</option>
+              <option value="Кухня">Кухня</option>
+              <option value="Кабинет">Кабинет</option>
+              <option value="Прихожая">Прихожая</option>
+              <option value="Ванная">Ванная</option>
+              <option value="Балкон">Балкон</option>
+              <option value="Другое">Другое</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="plant-interval">Интервал полива, дней*</label>
+            <input
+              type="number"
+              min="1"
+              max="90"
+              step="1"
+              name="wateringIntervalDays"
+              id="plant-interval"
+              required
+            />
+          </div>
+          <div class="form-field">
+            <label for="plant-last-watered">Последний полив*</label>
+            <input
+              type="date"
+              name="lastWateredOn"
+              id="plant-last-watered"
+              required
+            />
+          </div>
+          <div class="form-field">
+            <label for="plant-note">Заметка</label>
+            <textarea
+              rows="4"
+              maxlength="240"
+              name="note"
+              id="plant-note"
+            ></textarea>
+          </div>
+          <div class="plant-form__actions">
+            <button type="submit" class="button button--primary">
+              Добавить растение
+            </button>
+            <button type="reset" class="button button--edit">Очистить</button>
+            <button type="button" class="button button--edit">Отмена</button>
+          </div>
+        </form>
+      </section>
     </main>
     <footer class="container">
       <p>Данные хранятся только в этом браузере</p>
