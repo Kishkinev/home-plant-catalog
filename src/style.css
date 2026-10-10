@@ -111,3 +111,28 @@ textarea {
   font-size: 64px;
   font-weight: 700;
 }
+
+.plant-card {
+  display: grid;
+  gap: 12px;
+  padding: 20px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+}
+
+.plant-card__title,
+.plant-card p {
+  margin: 0;
+}
+
+.plant-card__title {
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.plant-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
