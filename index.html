@@ -136,14 +136,26 @@
       <section class="plant-editor">
         <h2>Новое растение</h2>
         <p>* — обязательные поля</p>
-        <form id="plant-form" class="plant-form">
+        <form id="plant-form" class="plant-form" novalidate>
           <div class="form-field">
             <label for="plant-name">Название растения*</label>
-            <input type="text" name="name" id="plant-name" required />
+            <input
+              type="text"
+              name="name"
+              id="plant-name"
+              aria-describedby="plant-name-error"
+              required
+            />
+            <p id="plant-name-error" class="form-error" hidden></p>
           </div>
           <div class="form-field">
             <label for="plant-room">Комната*</label>
-            <select name="room" id="plant-room" required>
+            <select
+              name="room"
+              id="plant-room"
+              aria-describedby="plant-room-error"
+              required
+            >
               <option value="">Выберите комнату</option>
               <option value="Гостиная">Гостиная</option>
               <option value="Спальня">Спальня</option>
@@ -154,6 +166,7 @@
               <option value="Балкон">Балкон</option>
               <option value="Другое">Другое</option>
             </select>
+            <p id="plant-room-error" class="form-error" hidden></p>
           </div>
           <div class="form-field">
             <label for="plant-interval">Интервал полива, дней*</label>
@@ -164,8 +177,10 @@
               step="1"
               name="wateringIntervalDays"
               id="plant-interval"
+              aria-describedby="plant-interval-error"
               required
             />
+            <p id="plant-interval-error" class="form-error" hidden></p>
           </div>
           <div class="form-field">
             <label for="plant-last-watered">Последний полив*</label>
@@ -173,8 +188,10 @@
               type="date"
               name="lastWateredOn"
               id="plant-last-watered"
+              aria-describedby="plant-last-watered-error"
               required
             />
+            <p id="plant-last-watered-error" class="form-error" hidden></p>
           </div>
           <div class="form-field">
             <label for="plant-note">Заметка</label>

@@ -9,6 +9,29 @@ if (!(form instanceof HTMLFormElement)) {
   throw new Error('Форма растения не найдена')
 }
 
+function showFieldError(fieldID: string, message: string | undefined): void {
+  const field = document.getElementById(fieldID)
+  const errorElement = document.getElementById(`${fieldID}-error`)
+
+  if (
+    !(
+      field instanceof HTMLInputElement || field instanceof HTMLSelectElement
+    ) ||
+    !(errorElement instanceof HTMLParagraphElement)
+  ) {
+    throw new Error(`Не найдены элементы поля ${fieldID}`)
+  }
+
+  errorElement.textContent = message ?? ''
+  errorElement.hidden = message === undefined
+
+  if (message === undefined) {
+    field.removeAttribute('aria-invalid')
+  } else {
+    field.setAttribute('aria-invalid', 'true')
+  }
+}
+
 form.addEventListener('submit', (event) => {
   event.preventDefault()
 
@@ -26,10 +49,16 @@ form.addEventListener('submit', (event) => {
   const today = formatLocalCalendarDate(new Date())
   const errors = validationPlant(plant, today)
 
+  showFieldError('plant-name', errors.name)
+  showFieldError('plant-room', errors.room)
+  showFieldError('plant-interval', errors.wateringIntervalDays)
+  showFieldError('plant-last-watered', errors.lastWateredOn)
+
   if (Object.keys(errors).length > 0) {
-    console.log(errors)
+    const firstInvalidField = form.querySelector('[aria-invalid="true"]')
+    if (firstInvalidField instanceof HTMLElement) {
+      firstInvalidField.focus()
+    }
     return
   }
-
-  console.log(plant)
 })
