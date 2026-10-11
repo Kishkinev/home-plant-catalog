@@ -32,6 +32,13 @@ function showFieldError(fieldID: string, message: string | undefined): void {
   }
 }
 
+function clearFormErrors(): void {
+  showFieldError('plant-name', undefined)
+  showFieldError('plant-room', undefined)
+  showFieldError('plant-interval', undefined)
+  showFieldError('plant-last-watered', undefined)
+}
+
 form.addEventListener('submit', (event) => {
   event.preventDefault()
 
@@ -61,4 +68,8 @@ form.addEventListener('submit', (event) => {
     }
     return
   }
+})
+
+form.addEventListener('reset', () => {
+  clearFormErrors()
 })
