@@ -13,11 +13,7 @@ export function readPlantForm(form: HTMLFormElement): Plant {
     note: String(data.get('note') ?? '').trim(),
   }
 }
-
-export function showFieldError(
-  fieldID: string,
-  message: string | undefined,
-): void {
+function showFieldError(fieldID: string, message: string | undefined): void {
   const field = document.getElementById(fieldID)
   const errorElement = document.getElementById(`${fieldID}-error`)
 
