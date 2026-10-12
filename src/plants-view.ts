@@ -1,4 +1,5 @@
 import type { Plant } from './plant'
+import { getDaysUntilWatering, getWateringStatus } from './watering'
 
 function createCardButton(
   label: string,
@@ -14,6 +15,30 @@ function createCardButton(
   return button
 }
 
+function createWateringHint(
+  remainingWateringDays: number | null,
+): HTMLParagraphElement {
+  const hint = document.createElement('p')
+  hint.className = 'plant-card__status'
+
+  const status = getWateringStatus(remainingWateringDays)
+  if (status === null || remainingWateringDays === null) {
+    hint.textContent = 'Не удалось рассчитать полив'
+    return hint
+  }
+  hint.classList.add(`plant-card__status--${status}`)
+  if (status === 'today') {
+    hint.textContent = `Полить сегодня`
+  }
+  if (status === 'upcoming') {
+    hint.textContent = `Полить через ${remainingWateringDays} дн.`
+  }
+  if (status === 'overdue') {
+    hint.textContent = `Полив просрочен на ${Math.abs(remainingWateringDays)} дн.`
+  }
+  return hint
+}
+
 function createCardActions(): HTMLDivElement {
   const actions = document.createElement('div')
   actions.className = 'plant-card__actions'
@@ -27,7 +52,7 @@ function createCardActions(): HTMLDivElement {
   return actions
 }
 
-function createPlantCard(plant: Plant): HTMLElement {
+function createPlantCard(plant: Plant, today: string): HTMLElement {
   const card = document.createElement('article')
   card.className = 'plant-card'
   card.dataset.id = plant.id
@@ -58,14 +83,20 @@ function createPlantCard(plant: Plant): HTMLElement {
   note.hidden = plant.note === ''
 
   const actions = createCardActions()
+  const remainingWateringDays = getDaysUntilWatering(plant, today)
+  const hint = createWateringHint(remainingWateringDays)
 
-  card.append(title, room, interval, lastWatered, note, actions)
+  card.append(title, hint, room, interval, lastWatered, note, actions)
 
   return card
 }
 
-export function renderPlants(container: HTMLElement, plants: Plant[]): void {
-  const cards = plants.map(createPlantCard)
+export function renderPlants(
+  container: HTMLElement,
+  plants: Plant[],
+  today: string,
+): void {
+  const cards = plants.map((p) => createPlantCard(p, today))
   container.replaceChildren(...cards)
 }
 

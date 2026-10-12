@@ -30,7 +30,9 @@ if (!(plantCount instanceof HTMLElement)) {
   throw new Error('Счётчик растений не найден')
 }
 
-renderPlants(plantList, plants)
+const today = formatLocalCalendarDate(new Date())
+
+renderPlants(plantList, plants, today)
 showCountOfPlants(plantCount, plants.length)
 
 form.addEventListener('submit', (event) => {
@@ -47,7 +49,7 @@ form.addEventListener('submit', (event) => {
     return
   }
   plants.push(plant)
-  renderPlants(plantList, plants)
+  renderPlants(plantList, plants, today)
   showCountOfPlants(plantCount, plants.length)
   form.reset()
 })
