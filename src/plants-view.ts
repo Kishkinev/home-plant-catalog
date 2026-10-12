@@ -62,8 +62,6 @@ function createPlantCard(plant: Plant): HTMLElement {
   card.append(title, room, interval, lastWatered, note, actions)
 
   return card
-
-  return card
 }
 
 export function renderPlants(container: HTMLElement, plants: Plant[]): void {
