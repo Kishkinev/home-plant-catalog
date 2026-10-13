@@ -103,3 +103,40 @@ export function renderPlants(
 export function showCountOfPlants(container: HTMLElement, count: number): void {
   container.textContent = String(count).padStart(2, '0')
 }
+
+function createCareCard(plant: Plant, today: string): HTMLElement {
+  const card = document.createElement('article')
+
+  const remainingWateringDays = getDaysUntilWatering(plant, today)
+  const status = getWateringStatus(remainingWateringDays)
+
+  card.className = 'plant-card'
+  card.classList.add(`plant-card--care-${status}`)
+  card.dataset.id = plant.id
+
+  const title = document.createElement('h3')
+  title.className = 'plant-card__title'
+  title.innerText = plant.name
+
+  const hint = createWateringHint(remainingWateringDays)
+  const button = createCardButton('Полито сегодня', 'water', 'primary')
+
+  card.append(title, hint, button)
+
+  return card
+}
+
+export function renderCarePlants(
+  container: HTMLElement,
+  plants: Plant[],
+  today: string,
+): void {
+  if (plants.length === 0) {
+    const p = document.createElement('p')
+    p.innerText = 'Сейчас нет растений, требующих полива'
+    container.replaceChildren(p)
+    return
+  }
+  const cards = plants.map((p) => createCareCard(p, today))
+  container.replaceChildren(...cards)
+}

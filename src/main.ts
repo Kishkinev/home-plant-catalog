@@ -8,7 +8,12 @@ import {
   clearFormErrors,
   focusFirstInvalidField,
 } from './plants-form'
-import { renderPlants, showCountOfPlants } from './plants-view'
+import {
+  renderPlants,
+  showCountOfPlants,
+  renderCarePlants,
+} from './plants-view'
+import { getPlantsNeedingWater } from './watering'
 
 const plants: Plant[] = []
 
@@ -30,9 +35,17 @@ if (!(plantCount instanceof HTMLElement)) {
   throw new Error('Счётчик растений не найден')
 }
 
+const careContainer = document.getElementById('care-list')
+
+if (!(careContainer instanceof HTMLElement)) {
+  throw new Error('Контейнер ухода не найден')
+}
+
 const today = formatLocalCalendarDate(new Date())
+const careList = getPlantsNeedingWater(plants, today)
 
 renderPlants(plantList, plants, today)
+renderCarePlants(careContainer, careList, today)
 showCountOfPlants(plantCount, plants.length)
 
 form.addEventListener('submit', (event) => {
@@ -48,9 +61,15 @@ form.addEventListener('submit', (event) => {
     focusFirstInvalidField(form)
     return
   }
+
   plants.push(plant)
+
+  const careList = getPlantsNeedingWater(plants, today)
+
   renderPlants(plantList, plants, today)
+  renderCarePlants(careContainer, careList, today)
   showCountOfPlants(plantCount, plants.length)
+
   form.reset()
 })
 

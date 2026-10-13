@@ -33,3 +33,26 @@ export function getWateringStatus(
   }
   return 'overdue'
 }
+
+export function getPlantsNeedingWater(plants: Plant[], today: string): Plant[] {
+  const plantsNeedingWater = plants.filter((p) => {
+    const remainingWateringDays = getDaysUntilWatering(p, today)
+
+    if (remainingWateringDays === null) {
+      return false
+    }
+
+    return remainingWateringDays <= 0
+  })
+
+  plantsNeedingWater.sort((a: Plant, b: Plant) => {
+    const firstPlantDays = getDaysUntilWatering(a, today)
+    const secondPlantDays = getDaysUntilWatering(b, today)
+
+    if (firstPlantDays === null || secondPlantDays === null) return 0
+
+    return firstPlantDays - secondPlantDays
+  })
+
+  return plantsNeedingWater
+}
