@@ -56,3 +56,9 @@ export function getPlantsNeedingWater(plants: Plant[], today: string): Plant[] {
 
   return plantsNeedingWater
 }
+
+export function waterPlant(plant: Plant, today: string): Plant {
+  const newPlant = { ...plant }
+  newPlant.lastWateredOn = today
+  return newPlant
+}

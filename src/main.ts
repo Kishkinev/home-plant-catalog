@@ -13,7 +13,7 @@ import {
   showCountOfPlants,
   renderCarePlants,
 } from './plants-view'
-import { getPlantsNeedingWater } from './watering'
+import { getPlantsNeedingWater, waterPlant } from './watering'
 
 const plants: Plant[] = []
 
@@ -42,11 +42,51 @@ if (!(careContainer instanceof HTMLElement)) {
 }
 
 const today = formatLocalCalendarDate(new Date())
-const careList = getPlantsNeedingWater(plants, today)
 
-renderPlants(plantList, plants, today)
-renderCarePlants(careContainer, careList, today)
-showCountOfPlants(plantCount, plants.length)
+const renderApp = (today: string): void => {
+  const careList = getPlantsNeedingWater(plants, today)
+
+  renderPlants(plantList, plants, today)
+  renderCarePlants(careContainer, careList, today)
+  showCountOfPlants(plantCount, plants.length)
+}
+
+renderApp(today)
+
+function handlePlantClick(event: MouseEvent): void {
+  const currentPlant = event.target
+  if (!(currentPlant instanceof Element)) {
+    return
+  }
+  const currentButton = currentPlant.closest('button[data-action]')
+  if (!(currentButton instanceof HTMLButtonElement)) {
+    return
+  }
+  if (currentButton.dataset.action !== 'water') {
+    return
+  }
+  const currentArticle = currentButton.closest('article[data-id]')
+  if (!(currentArticle instanceof HTMLElement)) {
+    return
+  }
+  const currentID = currentArticle.dataset.id
+  if (!currentID) {
+    return
+  }
+  const currentIndex = plants.findIndex((p) => p.id === currentID)
+  if (currentIndex === -1) {
+    return
+  }
+  const today = formatLocalCalendarDate(new Date())
+
+  plants[currentIndex] = waterPlant(plants[currentIndex], today)
+
+  renderApp(today)
+}
+
+plantList.addEventListener('click', handlePlantClick)
+
+careContainer.addEventListener('click', handlePlantClick)
 
 form.addEventListener('submit', (event) => {
   event.preventDefault()
@@ -64,11 +104,7 @@ form.addEventListener('submit', (event) => {
 
   plants.push(plant)
 
-  const careList = getPlantsNeedingWater(plants, today)
-
-  renderPlants(plantList, plants, today)
-  renderCarePlants(careContainer, careList, today)
-  showCountOfPlants(plantCount, plants.length)
+  renderApp(today)
 
   form.reset()
 })
